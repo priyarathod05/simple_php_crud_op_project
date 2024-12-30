@@ -37,6 +37,7 @@
       </thead>
       <tbody>
         <?php
+          global $link;        
         # Include connection
         require_once "./config.php";
 
