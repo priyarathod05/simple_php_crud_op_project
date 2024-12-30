@@ -10,6 +10,15 @@ jobs:
   phpstan:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+        ports:
+          - 3306:3306
+        options: --health-cmd "mysqladmin ping --silent" --health-interval 10s --health-timeout 5s --health-retries 3
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -21,12 +30,6 @@ jobs:
 
     - name: Install dependencies
       run: composer install --no-progress --prefer-dist
-
-    - name: Set up MySQL
-      uses: devcontainers-contrib/features/mysql@v1
-      with:
-        mysql-version: '8.0'
-        mysql-root-password: ${{ secrets.MYSQL_ROOT_PASSWORD }}
 
     - name: Fix PHPStan permissions
       run: chmod +x vendor/bin/phpstan
