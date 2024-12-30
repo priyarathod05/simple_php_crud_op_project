@@ -21,12 +21,12 @@ jobs:
 
     - name: Install dependencies
       run: composer install --no-progress --prefer-dist
-      
+
     - name: Set up MySQL
-        uses: devcontainers-contrib/features/mysql@v1
-        with:
-          mysql-version: '8.0'
-          mysql-root-password: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+      uses: devcontainers-contrib/features/mysql@v1
+      with:
+        mysql-version: '8.0'
+        mysql-root-password: ${{ secrets.MYSQL_ROOT_PASSWORD }}
 
     - name: Fix PHPStan permissions
       run: chmod +x vendor/bin/phpstan
