@@ -31,6 +31,9 @@ jobs:
     - name: Install dependencies
       run: composer install --no-progress --prefer-dist
 
+    - name: Print MySQL container logs (if failed)
+      run: docker logs $(docker ps -q --filter ancestor=mysql:8.0) || echo "MySQL service failed"
+
     - name: Fix PHPStan permissions
       run: chmod +x vendor/bin/phpstan
 
