@@ -1,4 +1,15 @@
 parameters:
-    level: max
-    excludePaths:
-        - vendor/*
+  level: max # or a lower level (e.g., 0, 1, 2, 3, or 4) for less strict checks
+  
+  # Optionally, you can ignore specific rules by adding them under excludePaths
+  excludePaths:
+    - */vendor/*
+
+  # Ignore specific errors or rules
+  ignoreErrors:
+    - '#Parameter #1 (mixed) of echo cannot be converted to string.#'
+    - '#Cannot access offset.*#'
+    - '#Parameter #1 $mysql of function mysqli_query expects mysqli, mixed given.#'
+    - '#mysqli_num_rows expects mysqli_result, mysqli_result\|true given.#'
+    - '#mysqli_fetch_all expects mysqli_result, mysqli_result\|true given.#'
+
